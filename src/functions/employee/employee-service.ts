@@ -4,10 +4,12 @@ import { Employee } from "src/entities/Employee"
 const create = async (data: Employee): Promise<Employee> => {
     try {
         // console.log('connction creating ...')
-        const empRepo = (await getDBConnection()).getRepository(Employee);
+        const connction = await getDBConnection();
+        const empRepo = connction.getRepository(Employee);
          console.log('connection success')
          console.log(empRepo)
-        return await empRepo.save(data);
+        const response = await empRepo.save(data);
+        return response;
     } catch (error) {
         throw error;
     }
